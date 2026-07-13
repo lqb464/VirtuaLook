@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hướng dẫn — VirtuaLook</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="/" class="font-bold text-indigo-600 text-lg">VirtuaLook</a>
+      <nav class="flex items-center gap-5 text-sm text-gray-600">
+        <a href="/">Trang chủ</a>
+        <a href="/features">Tính năng</a>
+        <a href="/guide" class="text-indigo-600 font-medium">Hướng dẫn</a>
+        <a href="/pricing">Bảng giá</a>
+        <a href="/about">Về dự án</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-1 py-16 px-4">
+    <div class="max-w-3xl mx-auto prose prose-indigo">
+      <h1 class="text-3xl font-bold text-gray-900 mb-6">Hướng dẫn cài đặt &amp; sử dụng</h1>
+
+      <h2 class="text-xl font-semibold mt-8 mb-3">1. Cài đặt nhanh (mock — không cần GPU)</h2>
+      <pre class="bg-gray-900 text-green-300 p-4 rounded-lg text-sm overflow-x-auto"><code>cd VirtuaLook
+cp services/vton/.env.example services/vton/.env
+pip install -r services/vton/requirements.txt
+VTON_BACKEND=mock python app.py</code></pre>
+      <p class="text-gray-600 text-sm">Mở <strong>http://localhost:8000</strong></p>
+
+      <h2 class="text-xl font-semibold mt-8 mb-3">2. Inference thật (CatVTON local)</h2>
+      <pre class="bg-gray-900 text-green-300 p-4 rounded-lg text-sm overflow-x-auto"><code>cd services/vton
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+pip install -r requirements.txt
+bash download-models.sh
+uvicorn app.main:app --reload --port 8000</code></pre>
+      <p class="text-gray-600 text-sm">CPU: 5–15 phút/ảnh. GPU (CUDA): nhanh hơn nhiều.</p>
+
+      <h2 class="text-xl font-semibold mt-8 mb-3">3. Replicate (cloud, chất lượng cao)</h2>
+      <pre class="bg-gray-900 text-green-300 p-4 rounded-lg text-sm overflow-x-auto"><code># Trong services/vton/.env
+REPLICATE_API_TOKEN=r8_...
+VTON_BACKEND=auto</code></pre>
+
+      <h2 class="text-xl font-semibold mt-8 mb-3">4. Luồng sử dụng</h2>
+      <ol class="list-decimal list-inside text-gray-700 space-y-2">
+        <li>Trang chủ → chọn trang phục → <strong>Thử đồ</strong></li>
+        <li>Upload ảnh toàn thân (đứng thẳng, nền đơn giản)</li>
+        <li>Nhấn <strong>Bắt đầu thử đồ</strong> → chờ job hoàn thành</li>
+        <li>Xem kết quả và lịch sử tại <a href="/admin" class="text-indigo-600">/admin</a></li>
+      </ol>
+
+      <h2 class="text-xl font-semibold mt-8 mb-3">5. Docker</h2>
+      <pre class="bg-gray-900 text-green-300 p-4 rounded-lg text-sm overflow-x-auto"><code>docker compose up --build</code></pre>
+      <p class="text-gray-600 text-sm">Mặc định chạy <code>VTON_BACKEND=mock</code>. Mount volume <code>virtulook_data</code> cho storage.</p>
+
+      <h2 class="text-xl font-semibold mt-8 mb-3">6. Test</h2>
+      <pre class="bg-gray-900 text-green-300 p-4 rounded-lg text-sm overflow-x-auto"><code>pip install -r requirements-dev.txt
+python -m pytest</code></pre>
+    </div>
+  </main>
+  <footer class="text-center text-sm text-gray-400 py-6 border-t">VirtuaLook © 2026</footer>
+</body>
+</html>

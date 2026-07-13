@@ -1,0 +1,59 @@
+/* Filter pills */
+.filter-pill {
+  background: white;
+  color: #6b7280;
+  transition: all 0.15s ease;
+}
+.filter-pill:hover {
+  border-color: #6366f1;
+  color: #6366f1;
+}
+.filter-pill.active {
+  background: #6366f1;
+  color: white;
+  border-color: #6366f1;
+}
+
+/* Garment card hover */
+.garment-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.garment-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Language toggle buttons */
+.lang-btn {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1.5px solid #e5e7eb;
+  color: #6b7280;
+  background: white;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.lang-btn:hover {
+  border-color: #6366f1;
+  color: #6366f1;
+}
+.lang-btn-active {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: white;
+}
+
+/* Result states — ensure flex works with toggle */
+#result-idle,
+#result-processing,
+#result-done,
+#result-failed {
+  display: none;
+}
+#result-idle.flex,
+#result-processing.flex,
+#result-done.flex,
+#result-failed.flex {
+  display: flex;
+}

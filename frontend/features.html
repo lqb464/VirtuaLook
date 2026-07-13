@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tính năng — VirtuaLook</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 font-bold text-indigo-600 text-lg">VirtuaLook</a>
+      <nav class="flex items-center gap-5 text-sm text-gray-600">
+        <a href="/" class="hover:text-indigo-600">Trang chủ</a>
+        <a href="/features" class="text-indigo-600 font-medium">Tính năng</a>
+        <a href="/guide" class="hover:text-indigo-600">Hướng dẫn</a>
+        <a href="/pricing" class="hover:text-indigo-600">Bảng giá</a>
+        <a href="/about" class="hover:text-indigo-600">Về dự án</a>
+        <a href="/admin" class="hover:text-indigo-600">Quản trị</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-1 py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold text-gray-900 text-center mb-4">Tính năng</h1>
+      <p class="text-center text-gray-500 mb-12">Công nghệ thử đồ ảo với nhiều backend inference linh hoạt.</p>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h2 class="text-lg font-semibold text-indigo-600 mb-2">🎯 CatVTON Local</h2>
+          <p class="text-gray-600 text-sm">Chạy hoàn toàn offline với Stable Diffusion inpainting + CatVTON attention weights. Hỗ trợ CPU và CUDA.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h2 class="text-lg font-semibold text-indigo-600 mb-2">☁️ Replicate IDM-VTON</h2>
+          <p class="text-gray-600 text-sm">Kết quả chất lượng cao qua cloud API (~30–60 giây). Chỉ cần <code>REPLICATE_API_TOKEN</code>.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h2 class="text-lg font-semibold text-indigo-600 mb-2">📸 Quản lý ảnh &amp; catalogue</h2>
+          <p class="text-gray-600 text-sm">Upload ảnh toàn thân, duyệt bộ sưu tập trang phục, lưu lịch sử try-on trong SQLite.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h2 class="text-lg font-semibold text-indigo-600 mb-2">⚡ Job async + polling</h2>
+          <p class="text-gray-600 text-sm">Inference chạy nền, UI poll trạng thái real-time. Diffusion không block event loop.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h2 class="text-lg font-semibold text-indigo-600 mb-2">🌐 Song ngữ VI/EN</h2>
+          <p class="text-gray-600 text-sm">Giao diện demo hỗ trợ tiếng Việt và tiếng Anh, không cần build step.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <h2 class="text-lg font-semibold text-indigo-600 mb-2">🛠️ Mock fallback</h2>
+          <p class="text-gray-600 text-sm">Phát triển UI/API ngay cả khi chưa tải model weights — overlay PIL tự động.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-center text-sm text-gray-400 py-6 border-t">VirtuaLook © 2026</footer>
+</body>
+</html>

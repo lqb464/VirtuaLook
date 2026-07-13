@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — VirtuaLook</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 font-bold text-indigo-600 text-lg">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 3l14 9-14 9V3z"/>
+        </svg>
+        VirtuaLook
+      </a>
+      <nav class="flex items-center gap-6 text-sm text-gray-600">
+        <a href="/" class="hover:text-indigo-600" data-i18n="home">Trang chủ</a>
+        <a href="/admin" class="hover:text-indigo-600 font-medium text-indigo-600" data-i18n="admin">Quản trị</a>
+        <div class="flex gap-1 ml-2">
+          <button class="lang-btn lang-btn-active" data-lang="vi" onclick="applyLang('vi')">VI</button>
+          <button class="lang-btn" data-lang="en" onclick="applyLang('en')">EN</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-8 flex-1 w-full">
+    <h1 class="text-2xl font-bold text-gray-900 mb-6" data-i18n="adminTitle">Bảng Điều Khiển Admin</h1>
+
+    <!-- Stats cards -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div class="bg-white rounded-xl border border-gray-200 p-4 shadow-sm text-center">
+        <p class="text-3xl font-bold text-indigo-600" id="stat-garments">—</p>
+        <p class="text-sm text-gray-500 mt-1" data-i18n="statGarments">Trang Phục</p>
+      </div>
+      <div class="bg-white rounded-xl border border-gray-200 p-4 shadow-sm text-center">
+        <p class="text-3xl font-bold text-indigo-600" id="stat-jobs">—</p>
+        <p class="text-sm text-gray-500 mt-1" data-i18n="statJobs">Tổng Lượt Thử</p>
+      </div>
+      <div class="bg-white rounded-xl border border-gray-200 p-4 shadow-sm text-center">
+        <p class="text-3xl font-bold text-green-600" id="stat-done">—</p>
+        <p class="text-sm text-gray-500 mt-1" data-i18n="statDone">Thành Công</p>
+      </div>
+      <div class="bg-white rounded-xl border border-gray-200 p-4 shadow-sm text-center">
+        <p class="text-3xl font-bold text-indigo-600" id="stat-rate">—%</p>
+        <p class="text-sm text-gray-500 mt-1" data-i18n="statRate">Tỷ Lệ Thành Công</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+      <!-- Garment management -->
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-semibold text-gray-800" data-i18n="garmentsSection">Trang Phục</h2>
+          <button onclick="toggleAddForm()"
+            class="text-sm bg-indigo-600 text-white px-3 py-1.5 rounded-lg hover:bg-indigo-700 transition"
+            data-i18n="addGarment">
+            + Thêm Trang Phục
+          </button>
+        </div>
+
+        <!-- Add garment form -->
+        <div id="add-form" class="hidden bg-white rounded-xl border border-gray-200 p-4 mb-4 shadow-sm space-y-3">
+          <h3 class="font-medium text-gray-700 text-sm" data-i18n="newGarment">Trang Phục Mới</h3>
+          <input id="new-name" type="text" data-i18n-placeholder="namePlaceholder"
+            placeholder="Tên"
+            class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+          <select id="new-category" class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300">
+            <option value="tops" data-i18n="catTops">Áo</option>
+            <option value="dresses" data-i18n="catDresses">Váy</option>
+            <option value="pants" data-i18n="catPants">Quần</option>
+            <option value="outerwear">Outerwear</option>
+          </select>
+          <input id="new-image-url" type="url" data-i18n-placeholder="imageUrlPlaceholder"
+            placeholder="URL Hình Ảnh"
+            class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+          <textarea id="new-description" data-i18n-placeholder="descPlaceholder"
+            placeholder="Mô tả (tùy chọn)" rows="2"
+            class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-300"></textarea>
+          <div class="flex gap-2">
+            <button onclick="addGarment()" class="flex-1 bg-indigo-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition" data-i18n="save">Lưu</button>
+            <button onclick="toggleAddForm()" class="flex-1 border border-gray-200 text-gray-600 py-2 rounded-lg text-sm hover:border-gray-300 transition" data-i18n="cancel">Hủy</button>
+          </div>
+        </div>
+
+        <!-- Garments list -->
+        <div id="garments-list" class="space-y-2">
+          <div class="flex justify-center py-8 text-gray-400">
+            <svg class="animate-spin w-6 h-6" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Try-on jobs -->
+      <div>
+        <h2 class="text-lg font-semibold text-gray-800 mb-4" data-i18n="jobsSection">Lịch Sử Thử Đồ</h2>
+        <div id="jobs-list" class="space-y-2">
+          <div class="flex justify-center py-8 text-gray-400">
+            <svg class="animate-spin w-6 h-6" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="border-t bg-white text-center text-sm text-gray-400 py-6 mt-8">
+    <p data-i18n="footer">Demo Công Nghệ Thử Đồ AI — © 2026 VirtuaLook</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+  <script>
+    const STATUS_COLORS = {
+      queued: 'bg-yellow-100 text-yellow-700',
+      processing: 'bg-blue-100 text-blue-700',
+      done: 'bg-green-100 text-green-700',
+      failed: 'bg-red-100 text-red-700',
+    };
+
+    function toggleAddForm() {
+      document.getElementById('add-form').classList.toggle('hidden');
+    }
+
+    async function loadStats() {
+      try {
+        const stats = await api('/api/admin/stats');
+        document.getElementById('stat-garments').textContent = stats.total_garments;
+        document.getElementById('stat-jobs').textContent = stats.total_jobs;
+        document.getElementById('stat-done').textContent = stats.done_jobs;
+        document.getElementById('stat-rate').textContent = stats.success_rate + '%';
+      } catch (e) { console.error(e); }
+    }
+
+    async function loadGarments() {
+      try {
+        const garments = await api('/api/garments');
+        const list = document.getElementById('garments-list');
+        const t = TRANSLATIONS[currentLang];
+        if (!garments.length) {
+          list.innerHTML = `<p class="text-sm text-gray-400 text-center py-4">${t.noGarmentsAdmin}</p>`;
+          return;
+        }
+        list.innerHTML = garments.map(g => `
+          <div class="bg-white rounded-xl border border-gray-100 p-3 flex items-center gap-3 shadow-sm">
+            <img src="${g.image_url}" alt="${g.name}"
+                 class="w-12 h-16 object-cover rounded-lg bg-gray-100"
+                 onerror="this.src='https://placehold.co/48x64/e8e8e8/999?text=?'" />
+            <div class="flex-1 min-w-0">
+              <p class="font-medium text-sm text-gray-800 truncate">${g.name}</p>
+              <p class="text-xs text-gray-400 capitalize">${g.category}</p>
+            </div>
+            <a href="/tryon?garmentId=${g.id}"
+               class="text-xs text-indigo-600 border border-indigo-200 px-2 py-1 rounded hover:bg-indigo-50 transition mr-1">
+              ${t.tryLink}
+            </a>
+            <button onclick="deleteGarment('${g.id}')"
+              class="text-xs text-red-500 border border-red-200 px-2 py-1 rounded hover:bg-red-50 transition">
+              ${t.deleteBtn}
+            </button>
+          </div>
+        `).join('');
+      } catch (e) { console.error(e); }
+    }
+
+    async function loadJobs() {
+      try {
+        const jobs = await api('/api/admin/jobs');
+        const list = document.getElementById('jobs-list');
+        const t = TRANSLATIONS[currentLang];
+        if (!jobs.length) {
+          list.innerHTML = `<p class="text-sm text-gray-400 text-center py-4">${t.noJobs}</p>`;
+          return;
+        }
+        list.innerHTML = jobs.map(j => `
+          <div class="bg-white rounded-xl border border-gray-100 p-3 shadow-sm">
+            <div class="flex items-center justify-between gap-2">
+              <div class="min-w-0">
+                <p class="font-medium text-sm text-gray-800 truncate">${j.garment_name || 'Unknown garment'}</p>
+                <p class="text-xs text-gray-400">${j.created_at ? new Date(j.created_at).toLocaleString() : ''}</p>
+              </div>
+              <span class="shrink-0 text-xs px-2 py-0.5 rounded-full font-medium ${STATUS_COLORS[j.status] || 'bg-gray-100 text-gray-600'}">${j.status}</span>
+            </div>
+            ${j.result_url ? `<a href="${j.result_url}" target="_blank" class="mt-2 block text-xs text-indigo-600 hover:underline">${t.viewResult}</a>` : ''}
+            ${j.error ? `<p class="mt-1 text-xs text-red-500 truncate">${j.error}</p>` : ''}
+          </div>
+        `).join('');
+      } catch (e) { console.error(e); }
+    }
+
+    async function addGarment() {
+      const name = document.getElementById('new-name').value.trim();
+      const category = document.getElementById('new-category').value;
+      const image_url = document.getElementById('new-image-url').value.trim();
+      const description = document.getElementById('new-description').value.trim();
+      const t = TRANSLATIONS[currentLang];
+      if (!name || !image_url) {
+        alert(currentLang === 'vi' ? 'Tên và URL hình ảnh là bắt buộc.' : 'Name and Image URL are required.');
+        return;
+      }
+      try {
+        await apiPost('/api/garments', { name, category, image_url, description });
+        toggleAddForm();
+        document.getElementById('new-name').value = '';
+        document.getElementById('new-image-url').value = '';
+        document.getElementById('new-description').value = '';
+        await loadGarments();
+        await loadStats();
+      } catch (e) { alert('Failed to add garment: ' + e.message); }
+    }
+
+    async function deleteGarment(id) {
+      const msg = currentLang === 'vi' ? 'Xóa trang phục này?' : 'Delete this garment?';
+      if (!confirm(msg)) return;
+      try {
+        await apiDelete(`/api/garments/${id}`);
+        await loadGarments();
+        await loadStats();
+      } catch (e) { alert('Failed to delete: ' + e.message); }
+    }
+
+    initLang();
+    loadStats();
+    loadGarments();
+    loadJobs();
+  </script>
+</body>
+</html>

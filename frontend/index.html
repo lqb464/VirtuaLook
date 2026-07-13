@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VirtuaLook — AI Virtual Try-On</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 font-bold text-indigo-600 text-lg">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 3l14 9-14 9V3z"/>
+        </svg>
+        VirtuaLook
+      </a>
+      <nav class="flex items-center gap-6 text-sm text-gray-600">
+        <a href="/" class="hover:text-indigo-600 font-medium text-indigo-600" data-i18n="home">Trang chủ</a>
+        <a href="/features" class="hover:text-indigo-600" data-i18n="features">Tính năng</a>
+        <a href="/guide" class="hover:text-indigo-600" data-i18n="guide">Hướng dẫn</a>
+        <a href="/pricing" class="hover:text-indigo-600" data-i18n="pricing">Bảng giá</a>
+        <a href="/about" class="hover:text-indigo-600" data-i18n="about">Về dự án</a>
+        <a href="/admin" class="hover:text-indigo-600" data-i18n="admin">Quản trị</a>
+        <div class="flex gap-1 ml-2">
+          <button class="lang-btn lang-btn-active" data-lang="vi" onclick="applyLang('vi')">VI</button>
+          <button class="lang-btn" data-lang="en" onclick="applyLang('en')">EN</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-16 px-4 text-center">
+    <div class="max-w-2xl mx-auto">
+      <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 bg-indigo-100 px-3 py-1 rounded-full mb-4" data-i18n="badge">
+        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        Ứng dụng AI IDM-VTON
+      </span>
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight" data-i18n="heroTitle">
+        Thử Đồ Ngay Lập Tức<br class="hidden md:block"/> Bằng Trí Tuệ Nhân Tạo
+      </h1>
+      <p class="mt-4 text-lg text-gray-500" data-i18n="heroSub">
+        Tải ảnh của bạn, chọn trang phục và xem bạn mặc như thế nào — không cần phòng thử đồ.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="#garments" class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition" data-i18n="browseBtn">
+          Xem Trang Phục
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-12 px-4 bg-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-center text-2xl font-bold text-gray-800 mb-8" data-i18n="howTitle">Cách Hoạt Động</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+        <div class="flex flex-col items-center gap-3">
+          <div class="w-14 h-14 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-2xl font-bold">1</div>
+          <h3 class="font-semibold text-gray-800" data-i18n="step1Title">Chọn Trang Phục</h3>
+          <p class="text-sm text-gray-500" data-i18n="step1Sub">Duyệt bộ sưu tập và chọn bộ đồ bạn muốn thử.</p>
+        </div>
+        <div class="flex flex-col items-center gap-3">
+          <div class="w-14 h-14 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-2xl font-bold">2</div>
+          <h3 class="font-semibold text-gray-800" data-i18n="step2Title">Tải Ảnh Của Bạn</h3>
+          <p class="text-sm text-gray-500" data-i18n="step2Sub">Tải ảnh toàn thân, đứng thẳng, để có kết quả tốt nhất.</p>
+        </div>
+        <div class="flex flex-col items-center gap-3">
+          <div class="w-14 h-14 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-2xl font-bold">3</div>
+          <h3 class="font-semibold text-gray-800" data-i18n="step3Title">Xem Kết Quả</h3>
+          <p class="text-sm text-gray-500" data-i18n="step3Sub">AI tạo ra hình ảnh thử đồ thực tế trong vài giây.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Garments Grid -->
+  <section id="garments" class="py-12 px-4 flex-1">
+    <div class="max-w-6xl mx-auto">
+      <!-- Filter pills -->
+      <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
+        <h2 class="text-2xl font-bold text-gray-800" data-i18n="garmentsTitle">Trang Phục</h2>
+        <div id="filter-pills" class="flex flex-wrap gap-2">
+          <button onclick="filterGarments('all')" class="filter-pill active px-3 py-1.5 rounded-full text-sm border" data-cat="all" data-i18n="catAll">Tất cả</button>
+          <button onclick="filterGarments('tops')" class="filter-pill px-3 py-1.5 rounded-full text-sm border" data-cat="tops" data-i18n="catTops">Áo</button>
+          <button onclick="filterGarments('dresses')" class="filter-pill px-3 py-1.5 rounded-full text-sm border" data-cat="dresses" data-i18n="catDresses">Váy</button>
+          <button onclick="filterGarments('pants')" class="filter-pill px-3 py-1.5 rounded-full text-sm border" data-cat="pants" data-i18n="catPants">Quần</button>
+        </div>
+      </div>
+
+      <div id="garments-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+        <div class="col-span-full flex justify-center py-16 text-gray-400">
+          <svg class="animate-spin w-8 h-8" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t bg-white text-center text-sm text-gray-400 py-6 mt-8">
+    <p data-i18n="footer">Demo Công Nghệ Thử Đồ AI — © 2026 VirtuaLook</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+  <script>
+    let allGarments = [];
+
+    async function loadGarments() {
+      try {
+        allGarments = await api('/api/garments');
+        renderGarments(allGarments);
+      } catch (e) {
+        const t = TRANSLATIONS[currentLang];
+        document.getElementById('garments-grid').innerHTML =
+          `<p class="col-span-full text-center text-red-500 py-8">${t.loadError}</p>`;
+      }
+    }
+
+    function filterGarments(cat) {
+      document.querySelectorAll('.filter-pill').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
+      const filtered = cat === 'all' ? allGarments : allGarments.filter(g => g.category === cat);
+      renderGarments(filtered);
+    }
+
+    function renderGarments(garments) {
+      const t = TRANSLATIONS[currentLang];
+      const grid = document.getElementById('garments-grid');
+      if (!garments.length) {
+        grid.innerHTML = `<p class="col-span-full text-center text-gray-400 py-12">${t.noGarments}</p>`;
+        return;
+      }
+      grid.innerHTML = garments.map(g => `
+        <div class="garment-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition group cursor-pointer"
+             onclick="window.location='/tryon?garmentId=${g.id}'">
+          <div class="aspect-[3/4] overflow-hidden bg-gray-100">
+            <img src="${g.image_url}" alt="${g.name}"
+                 class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                 onerror="this.src='https://placehold.co/400x533/e8e8e8/999?text=No+Image'"/>
+          </div>
+          <div class="p-3">
+            <h3 class="font-semibold text-gray-800 text-sm truncate">${g.name}</h3>
+            <span class="text-xs text-gray-400 capitalize">${g.category}</span>
+          </div>
+          <div class="px-3 pb-3">
+            <button class="w-full bg-indigo-600 text-white text-sm font-medium py-2 rounded-lg hover:bg-indigo-700 transition">
+              ${t.tryOn}
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    initLang();
+    loadGarments();
+  </script>
+</body>
+</html>
