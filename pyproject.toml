@@ -1,0 +1,13 @@
+[project]
+name = "virtulook"
+version = "1.0.0"
+description = "AI Virtual Try-On engine — CatVTON local, Replicate IDM-VTON, or mock fallback."
+readme = "README.md"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["services/vton"]
+asyncio_mode = "auto"
+
+[tool.black]
+line-length = 100

@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Model weights (large files — download via download-models.sh)
+services/vton/weights/
+
+# Uploaded files & results (user data)
+storage/person-photos/
+storage/try-on-results/
+
+# Database (auto-created on startup)
+storage/*.db
+
+# Environment secrets
+.env
+services/vton/.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp
+
+# Test / CI
+.pytest_cache/
+.coverage
+htmlcov/

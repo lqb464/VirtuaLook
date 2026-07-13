@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    container_name: virtulook-app
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8000
+      VTON_BACKEND: mock
+      UPLOAD_DIR: /data/storage
+    volumes:
+      - virtulook_data:/data
+
+volumes:
+  virtulook_data:

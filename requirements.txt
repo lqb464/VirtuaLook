@@ -1,0 +1,2 @@
+# Runtime API + mock backend (no torch — ~50MB install)
+-r services/vton/requirements.txt
