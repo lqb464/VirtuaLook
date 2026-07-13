@@ -1,0 +1,5 @@
+# Optional: local CatVTON inference (install AFTER torch)
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+diffusers>=0.28.0
+transformers>=4.40.0
+accelerate>=0.30.0
