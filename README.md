@@ -4,17 +4,15 @@
 
 Trọng tâm kỹ thuật là **ML inference service** (`services/vton/app`); `frontend/` là **demo UI** (HTML/JS, không cần npm) — mở qua server, **không** mở file `.html` trực tiếp.
 
-## UI — mở trình duyệt sau khi chạy server
+## UI — demo app (3 trang)
 
 | Trang | URL | Dùng để |
 |-------|-----|---------|
-| **Trang chủ** (catalogue) | http://127.0.0.1:8000/ | Chọn trang phục → Thử đồ |
-| **Thử đồ** | http://127.0.0.1:8000/tryon | Upload ảnh + chạy try-on |
-| **Quản trị** | http://127.0.0.1:8000/admin | Xem jobs, thống kê |
-| Tính năng | http://127.0.0.1:8000/features | |
-| Hướng dẫn | http://127.0.0.1:8000/guide | |
+| **Catalogue** | http://127.0.0.1:8000/ | Chọn trang phục → Thử đồ |
+| **Try-on** | http://127.0.0.1:8000/tryon | Upload ảnh + chạy inference |
+| **Jobs** | http://127.0.0.1:8000/admin | Jobs, stats, quản lý garments |
 
-**Luồng test nhanh:** Trang chủ → chọn áo → **Thử đồ** → upload ảnh toàn thân → **Bắt đầu thử đồ** → chờ vài giây (mock mode) → xem kết quả.
+**Luồng test nhanh:** Catalogue → chọn áo → **Thử đồ** → upload ảnh toàn thân → **Bắt đầu thử đồ** → chờ (mock: vài giây) → xem kết quả.
 
 ## Chạy với Docker (khuyên dùng cho demo)
 
@@ -59,17 +57,13 @@ CPU: ~5–15 phút/ảnh. CUDA: nhanh hơn nhiều (`DEVICE=auto`).
 
 | URL | Nội dung |
 |-----|----------|
-| `/` | Trang chủ + catalogue trang phục |
-| `/features` | Tính năng |
-| `/guide` | Hướng dẫn cài đặt |
-| `/pricing` | Bảng giá (demo) |
-| `/about` | Về dự án & roadmap |
-| `/tryon` | Luồng thử đồ |
-| `/admin` | Dashboard quản trị |
+| `/` | Catalogue trang phục |
+| `/tryon` | Luồng thử đồ / inference |
+| `/admin` | Jobs + quản lý garments |
 
 ## Luồng sử dụng
 
-1. Trang chủ → chọn trang phục → **Thử đồ**
+1. Catalogue → chọn trang phục → **Thử đồ**
 2. Upload ảnh toàn thân
 3. **Bắt đầu thử đồ** → poll trạng thái job
 4. Xem kết quả + lịch sử tại `/admin`
@@ -105,7 +99,7 @@ CPU: ~5–15 phút/ảnh. CUDA: nhanh hơn nhiều (`DEVICE=auto`).
 | `services/vton/app/inference.py` | Backend resolution + orchestration |
 | `services/vton/app/catvton_runner.py` | CatVTON diffusion (thread pool, GPU) |
 | `services/vton/app/replicate_runner.py` | Replicate IDM-VTON client |
-| `services/vton/app/site_pages.py` | Marketing + app page routes |
+| `services/vton/app/site_pages.py` | Demo UI page routes |
 | `services/vton/app/routers/` | REST API (garments, photos, tryon, admin) |
 | `services/vton/app/database.py` | SQLite + SQLAlchemy |
 | `frontend/` | Demo UI (HTML/JS/Tailwind CDN) |

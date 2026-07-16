@@ -1,59 +1,275 @@
+/* VirtuaLook — aligned with AgenThink / RAnythinG / SketClothes */
+
+:root {
+  --bg: #060a12;
+  --panel: #0c1422;
+  --panel-2: #111b2e;
+  --border: rgba(51, 65, 85, 0.55);
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --accent: #0095ff;
+  --accent-light: #5bcefa;
+  --accent-dark: #0071c5;
+  --accent-soft: rgba(0, 149, 255, 0.12);
+  --accent-glow: rgba(0, 149, 255, 0.28);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Outfit", system-ui, sans-serif;
+  background:
+    radial-gradient(ellipse 120% 70% at 50% -15%, #0c1929 0%, #060a12 55%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Brand gradient (RAnythinG-style) */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #bae6fd, var(--accent-light), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand svg {
+  flex-shrink: 0;
+  color: var(--accent-light);
+  stroke: var(--accent-light);
+  -webkit-text-fill-color: initial;
+  background: none;
+}
+
+/* Site header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  border-bottom: 1px solid var(--border);
+  background: rgba(6, 10, 18, 0.88);
+  backdrop-filter: blur(12px);
+}
+
+.site-nav a {
+  color: #94a3b8;
+  transition: color 0.15s;
+}
+
+.site-nav a:hover,
+.site-nav a.active {
+  color: var(--text);
+}
+
+.site-nav a.active {
+  color: var(--accent-light);
+  font-weight: 600;
+}
+
+/* Panels / cards */
+.vl-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+}
+
+/* Primary CTA */
+.vl-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 4px 16px var(--accent-glow);
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.vl-btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(0, 149, 255, 0.4);
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+}
+
+.vl-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.vl-btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: #cbd5e1;
+  border-radius: 12px;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.vl-btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
 /* Filter pills */
 .filter-pill {
-  background: white;
-  color: #6b7280;
+  background: var(--panel-2);
+  color: var(--muted);
+  border: 1px solid var(--border);
   transition: all 0.15s ease;
 }
+
 .filter-pill:hover {
-  border-color: #6366f1;
-  color: #6366f1;
+  border-color: var(--accent);
+  color: var(--accent-light);
 }
+
 .filter-pill.active {
-  background: #6366f1;
-  color: white;
-  border-color: #6366f1;
+  background: var(--accent-soft);
+  color: var(--accent-light);
+  border-color: rgba(0, 149, 255, 0.45);
 }
 
 /* Garment card hover */
 .garment-card {
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.garment-card:hover {
-  transform: translateY(-2px);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s;
 }
 
-/* Language toggle buttons */
+.garment-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 149, 255, 0.4);
+  box-shadow: 0 0 0 1px var(--accent-soft), 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Language toggle */
 .lang-btn {
   font-size: 0.75rem;
   font-weight: 600;
   padding: 2px 8px;
   border-radius: 9999px;
-  border: 1.5px solid #e5e7eb;
-  color: #6b7280;
-  background: white;
+  border: 1.5px solid var(--border);
+  color: var(--muted);
+  background: var(--panel-2);
   cursor: pointer;
   transition: all 0.15s ease;
 }
+
 .lang-btn:hover {
-  border-color: #6366f1;
-  color: #6366f1;
+  border-color: var(--accent);
+  color: var(--accent-light);
 }
+
 .lang-btn-active {
-  background: #6366f1;
-  border-color: #6366f1;
+  background: var(--accent);
+  border-color: var(--accent);
   color: white;
 }
 
-/* Result states — ensure flex works with toggle */
+.badge {
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: var(--accent-soft);
+  color: var(--accent-light);
+  border: 1px solid rgba(0, 149, 255, 0.28);
+}
+
+/* Form controls */
+.vl-input {
+  width: 100%;
+  background: #080e18;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.vl-input:focus {
+  border-color: rgba(0, 149, 255, 0.5);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.vl-input::placeholder {
+  color: #5f7190;
+}
+
+/* Dropzone */
+.vl-dropzone {
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.vl-dropzone:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-light);
+}
+
+/* Result states */
 #result-idle,
 #result-processing,
 #result-done,
 #result-failed {
   display: none;
 }
+
 #result-idle.flex,
 #result-processing.flex,
 #result-done.flex,
 #result-failed.flex {
   display: flex;
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: rgba(6, 10, 18, 0.6);
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.875rem;
+  padding: 1.5rem 1rem;
+  margin-top: 2rem;
+}
+
+/* Code blocks on guide */
+pre.code-block {
+  background: #0b1220;
+  border: 1px solid var(--border);
+  color: #6ee7b7;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  overflow-x: auto;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(51, 65, 85, 0.5);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(71, 85, 105, 0.8);
 }

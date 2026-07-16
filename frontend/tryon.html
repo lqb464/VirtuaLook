@@ -5,22 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thử Đồ — VirtuaLook</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            vl: {
+              bg: '#060a12', panel: '#0c1422', 'panel-2': '#111b2e',
+              accent: '#0095ff', 'accent-light': '#5bcefa', 'accent-dark': '#0071c5',
+            }
+          },
+          fontFamily: { sans: ['Outfit', 'system-ui', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/static/style.css" />
 </head>
-<body class="bg-gray-50 min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col font-sans">
 
-  <!-- Header -->
-  <header class="bg-white border-b border-gray-200 sticky top-0 z-30 shadow-sm">
+  <header class="site-header">
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-2 font-bold text-indigo-600 text-lg">
+      <a href="/" class="flex items-center gap-2 brand text-lg">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 3l14 9-14 9V3z"/>
         </svg>
         VirtuaLook
       </a>
-      <nav class="flex items-center gap-6 text-sm text-gray-600">
-        <a href="/" class="hover:text-indigo-600" data-i18n="home">Trang chủ</a>
-        <a href="/admin" class="hover:text-indigo-600" data-i18n="admin">Quản trị</a>
+      <nav class="site-nav flex items-center gap-6 text-sm">
+        <a href="/" data-i18n="home">Catalogue</a>
+        <a href="/admin" data-i18n="admin">Jobs</a>
         <div class="flex gap-1 ml-2">
           <button class="lang-btn lang-btn-active" data-lang="vi" onclick="applyLang('vi')">VI</button>
           <button class="lang-btn" data-lang="en" onclick="applyLang('en')">EN</button>
@@ -31,143 +48,128 @@
 
   <main class="max-w-5xl mx-auto px-4 py-8 flex-1 w-full">
 
-    <a href="/" class="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-indigo-600 mb-6">
+    <a href="/" class="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-vl-accent-light mb-6 transition">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
       </svg>
       <span data-i18n="backLink">Quay lại danh sách</span>
     </a>
 
-    <h1 class="text-2xl font-bold text-gray-900 mb-6" data-i18n="tryOnTitle">Thử Đồ Ảo</h1>
+    <h1 class="text-2xl font-bold text-slate-100 mb-6" data-i18n="tryOnTitle">Thử Đồ Ảo</h1>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-      <!-- Left: Garment + Photo selection -->
       <div class="space-y-6">
-
-        <!-- Garment preview -->
-        <div class="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
-          <h2 class="font-semibold text-gray-700 mb-3 text-sm uppercase tracking-wide" data-i18n="selectedGarment">Trang Phục Đã Chọn</h2>
-          <div id="garment-loading" class="flex items-center justify-center h-48 text-gray-400">
+        <div class="vl-card p-4">
+          <h2 class="font-semibold text-slate-300 mb-3 text-sm uppercase tracking-wide" data-i18n="selectedGarment">Trang Phục Đã Chọn</h2>
+          <div id="garment-loading" class="flex items-center justify-center h-48 text-slate-500">
             <svg class="animate-spin w-6 h-6" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
             </svg>
           </div>
           <div id="garment-info" class="hidden">
-            <div class="aspect-[3/4] overflow-hidden rounded-lg bg-gray-100 mb-3">
+            <div class="aspect-[3/4] overflow-hidden rounded-lg bg-vl-panel-2 mb-3">
               <img id="garment-img" src="" alt="" class="w-full h-full object-cover" />
             </div>
-            <h3 id="garment-name" class="font-semibold text-gray-800"></h3>
-            <p id="garment-category" class="text-xs text-gray-400 capitalize mt-0.5"></p>
+            <h3 id="garment-name" class="font-semibold text-slate-200"></h3>
+            <p id="garment-category" class="text-xs text-slate-500 capitalize mt-0.5"></p>
           </div>
         </div>
 
-        <!-- Photo selection -->
-        <div class="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
-          <h2 class="font-semibold text-gray-700 mb-3 text-sm uppercase tracking-wide" data-i18n="yourPhoto">Ảnh Của Bạn</h2>
-          <p class="text-xs text-gray-400 mb-3" data-i18n="photoHint">Đứng thẳng, hiện toàn thân. Mặc quần áo vừa vặn để có kết quả tốt nhất.</p>
+        <div class="vl-card p-4">
+          <h2 class="font-semibold text-slate-300 mb-3 text-sm uppercase tracking-wide" data-i18n="yourPhoto">Ảnh Của Bạn</h2>
+          <p class="text-xs text-slate-500 mb-3" data-i18n="photoHint">Đứng thẳng, hiện toàn thân. Mặc quần áo vừa vặn để có kết quả tốt nhất.</p>
 
-          <!-- Upload new -->
-          <label class="flex items-center gap-2 cursor-pointer border-2 border-dashed border-gray-200 rounded-lg p-4 hover:border-indigo-400 transition mb-4 group">
-            <svg class="w-5 h-5 text-gray-400 group-hover:text-indigo-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <label class="vl-dropzone flex items-center gap-2 cursor-pointer p-4 mb-4 group">
+            <svg class="w-5 h-5 text-slate-500 group-hover:text-vl-accent-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12V4m0 0L8 8m4-4l4 4"/>
             </svg>
-            <span class="text-sm text-gray-500 group-hover:text-indigo-600" data-i18n="uploadPhoto">Tải ảnh mới lên</span>
+            <span class="text-sm text-slate-400 group-hover:text-vl-accent-light" data-i18n="uploadPhoto">Tải ảnh mới lên</span>
             <input id="photo-upload" type="file" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)" />
           </label>
 
-          <!-- Existing photos -->
-          <div id="photos-list" class="grid grid-cols-3 gap-2">
-            <!-- populated by JS -->
-          </div>
-          <p id="photos-empty" class="text-xs text-gray-400 text-center py-4 hidden" data-i18n="noPhotos">Chưa có ảnh nào. Hãy tải ảnh lên trên.</p>
+          <div id="photos-list" class="grid grid-cols-3 gap-2"></div>
+          <p id="photos-empty" class="text-xs text-slate-500 text-center py-4 hidden" data-i18n="noPhotos">Chưa có ảnh nào. Hãy tải ảnh lên trên.</p>
         </div>
       </div>
 
-      <!-- Right: Result -->
       <div class="space-y-6">
-        <div class="bg-white rounded-xl border border-gray-200 p-4 shadow-sm min-h-[400px] flex flex-col">
-          <h2 class="font-semibold text-gray-700 mb-3 text-sm uppercase tracking-wide" data-i18n="resultTitle">Kết Quả</h2>
+        <div class="vl-card p-4 min-h-[400px] flex flex-col">
+          <h2 class="font-semibold text-slate-300 mb-3 text-sm uppercase tracking-wide" data-i18n="resultTitle">Kết Quả</h2>
 
-          <!-- Idle state -->
           <div id="result-idle" class="flex-1 flex flex-col items-center justify-center gap-4 text-center">
-            <div class="w-20 h-20 rounded-full bg-indigo-50 flex items-center justify-center">
-              <svg class="w-10 h-10 text-indigo-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <div class="w-20 h-20 rounded-full bg-vl-accent/10 flex items-center justify-center border border-[rgba(0,149,255,0.25)]">
+              <svg class="w-10 h-10 text-vl-accent-light/70" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
             </div>
             <div>
-              <p class="font-medium text-gray-700" data-i18n="selectHint">Chọn ảnh để bắt đầu</p>
-              <p class="text-sm text-gray-400 mt-1" data-i18n="selectHint2">Tải ảnh và nhấn "Bắt Đầu Thử Đồ"</p>
+              <p class="font-medium text-slate-300" data-i18n="selectHint">Chọn ảnh để bắt đầu</p>
+              <p class="text-sm text-slate-500 mt-1" data-i18n="selectHint2">Tải ảnh và nhấn "Bắt Đầu Thử Đồ"</p>
             </div>
             <button id="start-btn" onclick="startTryOn()"
-              class="mt-2 bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              class="mt-2 vl-btn-primary px-8 py-3 disabled:opacity-50 disabled:cursor-not-allowed"
               data-i18n="startBtn"
               disabled>
               Bắt Đầu Thử Đồ
             </button>
           </div>
 
-          <!-- Processing state -->
           <div id="result-processing" class="flex-1 flex-col items-center justify-center gap-4 text-center hidden">
             <div class="relative w-20 h-20">
-              <svg class="animate-spin w-20 h-20 text-indigo-200" fill="none" viewBox="0 0 24 24">
+              <svg class="animate-spin w-20 h-20 text-vl-accent/40" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
               </svg>
               <div class="absolute inset-0 flex items-center justify-center">
-                <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <svg class="w-8 h-8 text-vl-accent-light" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
                 </svg>
               </div>
             </div>
             <div>
-              <p class="font-semibold text-gray-700" data-i18n="processingTitle">AI đang xử lý ảnh thử đồ của bạn…</p>
-              <p id="processing-status" class="text-sm text-gray-400 mt-1" data-i18n="processingHint">Quá trình này có thể mất 30–60 giây</p>
+              <p class="font-semibold text-slate-300" data-i18n="processingTitle">AI đang xử lý ảnh thử đồ của bạn…</p>
+              <p id="processing-status" class="text-sm text-slate-500 mt-1" data-i18n="processingHint">Quá trình này có thể mất 30–60 giây</p>
             </div>
-            <!-- CPU mode warning — shown when backend is catvton/local -->
-            <div id="cpu-warning" class="hidden mt-1 flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 text-left max-w-xs">
-              <svg class="w-4 h-4 text-amber-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <div id="cpu-warning" class="hidden mt-1 flex items-start gap-2 bg-amber-500/10 border border-amber-500/30 rounded-lg px-3 py-2 text-left max-w-xs">
+              <svg class="w-4 h-4 text-amber-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
               </svg>
-              <p class="text-xs text-amber-700" data-i18n="cpuWarning">CPU mode: AI đang tính toán, có thể mất 5–15 phút. Đừng đóng trang.</p>
+              <p class="text-xs text-amber-300" data-i18n="cpuWarning">CPU mode: AI đang tính toán, có thể mất 5–15 phút. Đừng đóng trang.</p>
             </div>
-            <!-- Elapsed timer -->
-            <p id="elapsed-timer" class="text-xs text-gray-300 hidden"></p>
+            <p id="elapsed-timer" class="text-xs text-slate-600 hidden"></p>
           </div>
 
-          <!-- Done state -->
           <div id="result-done" class="flex-1 flex-col gap-3 hidden">
-            <div class="rounded-lg overflow-hidden bg-gray-100 flex-1">
+            <div class="rounded-lg overflow-hidden bg-vl-panel-2 flex-1">
               <img id="result-img" src="" alt="Try-on result" class="w-full object-contain max-h-[480px]" />
             </div>
             <div class="flex gap-2 mt-2">
               <a id="download-btn" href="#" download="virtulook-tryon.jpg"
-                class="flex-1 flex items-center justify-center gap-2 bg-indigo-600 text-white py-2.5 rounded-lg text-sm font-medium hover:bg-indigo-700 transition">
+                class="vl-btn-primary flex-1 flex items-center justify-center gap-2 py-2.5 text-sm">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 4v12m0 0l-4-4m4 4l4-4"/>
                 </svg>
                 <span data-i18n="download">Tải Xuống</span>
               </a>
               <button onclick="resetResult()"
-                class="flex-1 border border-gray-200 text-gray-600 py-2.5 rounded-lg text-sm font-medium hover:border-indigo-400 hover:text-indigo-600 transition"
+                class="vl-btn-ghost flex-1 py-2.5 text-sm font-medium"
                 data-i18n="tryAgain">
                 Thử Lại
               </button>
             </div>
           </div>
 
-          <!-- Failed state -->
           <div id="result-failed" class="flex-1 flex-col items-center justify-center gap-3 text-center hidden">
-            <div class="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center">
+            <div class="w-14 h-14 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/30">
               <svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
               </svg>
             </div>
-            <p class="font-medium text-gray-700" data-i18n="failedTitle">Xử lý thất bại</p>
-            <p id="error-msg" class="text-sm text-red-500"></p>
-            <button onclick="resetResult()" class="border border-gray-200 text-gray-600 px-5 py-2 rounded-lg text-sm hover:border-indigo-400 hover:text-indigo-600 transition" data-i18n="tryAgain">
+            <p class="font-medium text-slate-300" data-i18n="failedTitle">Xử lý thất bại</p>
+            <p id="error-msg" class="text-sm text-red-400"></p>
+            <button onclick="resetResult()" class="vl-btn-ghost px-5 py-2 text-sm" data-i18n="tryAgain">
               Thử Lại
             </button>
           </div>
@@ -177,7 +179,7 @@
     </div>
   </main>
 
-  <footer class="border-t bg-white text-center text-sm text-gray-400 py-6 mt-8">
+  <footer class="site-footer">
     <p data-i18n="footer">Demo Công Nghệ Thử Đồ AI — © 2026 VirtuaLook</p>
   </footer>
 
@@ -190,9 +192,8 @@
     let currentJobId = null;
     let pollTimer = null;
     let elapsedTimer = null;
-    let serverBackend = 'mock';  // updated after health check
+    let serverBackend = 'mock';
 
-    // Check server backend to decide if CPU warning is needed
     async function checkBackend() {
       try {
         const info = await api('/health');
@@ -200,7 +201,6 @@
       } catch (e) { /* ignore */ }
     }
 
-    // Load garment
     async function loadGarment() {
       if (!garmentId) { location.href = '/'; return; }
       try {
@@ -219,7 +219,6 @@
       }
     }
 
-    // Load photos
     async function loadPhotos() {
       try {
         const photos = await api('/api/photos');
@@ -233,21 +232,20 @@
         empty.classList.add('hidden');
         list.innerHTML = photos.map(p => `
           <div class="photo-thumb relative group aspect-square rounded-lg overflow-hidden border-2 cursor-pointer transition
-                       ${p.id === selectedPhotoId ? 'border-indigo-500' : 'border-transparent hover:border-indigo-300'}"
+                       ${p.id === selectedPhotoId ? 'border-vl-accent' : 'border-transparent hover:border-vl-accent/50'}"
                data-id="${p.id}"
                onclick="selectPhoto('${p.id}')">
             <img src="${p.url}" alt="${p.label || 'photo'}" class="w-full h-full object-cover" />
-            ${p.is_default ? `<span class="absolute top-1 left-1 bg-indigo-600 text-white text-[9px] px-1 rounded font-bold leading-4">✓</span>` : ''}
-            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex flex-col items-center justify-center gap-1 p-1">
+            ${p.is_default ? `<span class="absolute top-1 left-1 bg-vl-accent text-white text-[9px] px-1 rounded font-bold leading-4">✓</span>` : ''}
+            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex flex-col items-center justify-center gap-1 p-1">
               ${!p.is_default ? `<button onclick="event.stopPropagation(); setDefaultPhoto('${p.id}')"
-                class="w-full text-[10px] bg-white/90 text-indigo-700 font-semibold rounded px-1 py-0.5 hover:bg-white transition" data-i18n="setDefault">Đặt mặc định</button>` : ''}
+                class="w-full text-[10px] bg-vl-panel/95 text-vl-accent-light font-semibold rounded px-1 py-0.5 hover:bg-vl-panel transition" data-i18n="setDefault">Đặt mặc định</button>` : ''}
               <button onclick="event.stopPropagation(); deletePhoto('${p.id}')"
-                class="w-full text-[10px] bg-white/90 text-red-600 font-semibold rounded px-1 py-0.5 hover:bg-white transition" data-i18n="delete">Xóa</button>
+                class="w-full text-[10px] bg-vl-panel/95 text-red-400 font-semibold rounded px-1 py-0.5 hover:bg-vl-panel transition" data-i18n="delete">Xóa</button>
             </div>
           </div>
         `).join('');
         applyLang(currentLang);
-        // Auto-select default photo
         if (!selectedPhotoId) {
           const def = photos.find(p => p.is_default) || photos[0];
           if (def) selectPhoto(def.id);
@@ -260,9 +258,9 @@
     function selectPhoto(id) {
       selectedPhotoId = id;
       document.querySelectorAll('.photo-thumb').forEach(el => {
-        el.classList.toggle('border-indigo-500', el.dataset.id === id);
+        el.classList.toggle('border-vl-accent', el.dataset.id === id);
         el.classList.toggle('border-transparent', el.dataset.id !== id);
-        el.classList.toggle('hover:border-indigo-300', el.dataset.id !== id);
+        el.classList.toggle('hover:border-vl-accent/50', el.dataset.id !== id);
       });
       document.getElementById('start-btn').disabled = false;
     }
@@ -310,12 +308,10 @@
       if (!selectedPhotoId || !selectedGarment) return;
       showState('processing');
 
-      // Show CPU warning for local inference backends
       const isCpuBackend = serverBackend === 'catvton' || serverBackend === 'local';
       document.getElementById('cpu-warning').classList.toggle('hidden', !isCpuBackend);
       document.getElementById('cpu-warning').classList.toggle('flex', isCpuBackend);
 
-      // Start elapsed timer
       if (isCpuBackend) startElapsedTimer();
 
       try {

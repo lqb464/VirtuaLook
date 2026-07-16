@@ -62,26 +62,11 @@ async function apiDelete(path) {
 
 const TRANSLATIONS = {
   en: {
-    // nav
-    home: 'Home',
-    features: 'Features',
-    guide: 'Guide',
-    pricing: 'Pricing',
-    about: 'About',
-    admin: 'Admin',
-    // index
-    badge: 'Powered by IDM-VTON AI',
-    heroTitle: 'Try On Any Outfit<br class="hidden md:block"/> Instantly with AI',
-    heroSub: 'Upload your photo, pick a garment, and see how it looks on you — no fitting room needed.',
-    browseBtn: 'Browse Garments',
-    howTitle: 'How It Works',
-    step1Title: 'Choose a Garment',
-    step1Sub: 'Browse our collection and pick the outfit you want to try.',
-    step2Title: 'Upload Your Photo',
-    step2Sub: 'Upload a full-body photo of yourself standing straight.',
-    step3Title: 'See the Result',
-    step3Sub: 'Our AI generates a realistic try-on image in seconds.',
-    garmentsTitle: 'Garments',
+    home: 'Catalogue',
+    admin: 'Jobs',
+    badge: 'VTON demo',
+    heroSub: 'Pick a garment → upload a photo → run inference (CatVTON / Replicate / mock).',
+    garmentsTitle: 'Garment catalogue',
     catAll: 'All',
     catTops: 'Tops',
     catDresses: 'Dresses',
@@ -89,10 +74,9 @@ const TRANSLATIONS = {
     tryOn: 'Try On',
     noGarments: 'No garments found.',
     loadError: 'Failed to load garments. Make sure the server is running.',
-    footer: 'AI Virtual Try-On Technology Demo — © 2026 VirtuaLook',
-    // tryon
+    footer: 'VirtuaLook · VTON inference demo',
     tryOnTitle: 'Virtual Try-On',
-    backLink: 'Back to garments',
+    backLink: 'Back to catalogue',
     selectedGarment: 'Selected Garment',
     yourPhoto: 'Your Photo',
     photoHint: 'Stand straight, full body visible. Wear fitted clothes for best results.',
@@ -110,8 +94,7 @@ const TRANSLATIONS = {
     failedTitle: 'Processing failed',
     setDefault: 'Set default',
     delete: 'Delete',
-    // admin
-    adminTitle: 'Admin Dashboard',
+    adminTitle: 'Jobs & garments',
     statGarments: 'Garments',
     statJobs: 'Total Try-Ons',
     statDone: 'Successful',
@@ -132,37 +115,21 @@ const TRANSLATIONS = {
     viewResult: 'View result →',
   },
   vi: {
-    // nav
-    home: 'Trang chủ',
-    features: 'Tính năng',
-    guide: 'Hướng dẫn',
-    pricing: 'Bảng giá',
-    about: 'Về dự án',
-    admin: 'Quản trị',
-    // index
-    badge: 'Ứng dụng AI IDM-VTON',
-    heroTitle: 'Thử Đồ Ngay Lập Tức<br class="hidden md:block"/> Bằng Trí Tuệ Nhân Tạo',
-    heroSub: 'Tải ảnh của bạn, chọn trang phục và xem bạn mặc như thế nào — không cần phòng thử đồ.',
-    browseBtn: 'Xem Trang Phục',
-    howTitle: 'Cách Hoạt Động',
-    step1Title: 'Chọn Trang Phục',
-    step1Sub: 'Duyệt bộ sưu tập và chọn bộ đồ bạn muốn thử.',
-    step2Title: 'Tải Ảnh Của Bạn',
-    step2Sub: 'Tải ảnh toàn thân, đứng thẳng, để có kết quả tốt nhất.',
-    step3Title: 'Xem Kết Quả',
-    step3Sub: 'AI tạo ra hình ảnh thử đồ thực tế trong vài giây.',
-    garmentsTitle: 'Trang Phục',
+    home: 'Catalogue',
+    admin: 'Jobs',
+    badge: 'VTON demo',
+    heroSub: 'Chọn trang phục → upload ảnh → chạy inference (CatVTON / Replicate / mock).',
+    garmentsTitle: 'Catalogue trang phục',
     catAll: 'Tất cả',
     catTops: 'Áo',
     catDresses: 'Váy',
     catPants: 'Quần',
     tryOn: 'Thử Đồ',
-    noGarments: 'Không tìm thấy trang phục nào.',
-    loadError: 'Không thể tải trang phục. Hãy đảm bảo server đang chạy.',
-    footer: 'Demo Công Nghệ Thử Đồ AI — © 2026 VirtuaLook',
-    // tryon
+    noGarments: 'Chưa có trang phục.',
+    loadError: 'Không tải được catalogue. Kiểm tra server đang chạy.',
+    footer: 'VirtuaLook · VTON inference demo',
     tryOnTitle: 'Thử Đồ Ảo',
-    backLink: 'Quay lại danh sách',
+    backLink: 'Quay lại catalogue',
     selectedGarment: 'Trang Phục Đã Chọn',
     yourPhoto: 'Ảnh Của Bạn',
     photoHint: 'Đứng thẳng, hiện toàn thân. Mặc quần áo vừa vặn để có kết quả tốt nhất.',
@@ -180,8 +147,7 @@ const TRANSLATIONS = {
     failedTitle: 'Xử lý thất bại',
     setDefault: 'Đặt mặc định',
     delete: 'Xóa',
-    // admin
-    adminTitle: 'Bảng Điều Khiển Admin',
+    adminTitle: 'Jobs & trang phục',
     statGarments: 'Trang Phục',
     statJobs: 'Tổng Lượt Thử',
     statDone: 'Thành Công',
@@ -194,11 +160,11 @@ const TRANSLATIONS = {
     descPlaceholder: 'Mô tả (tùy chọn)',
     save: 'Lưu',
     cancel: 'Hủy',
-    noGarmentsAdmin: 'Chưa có trang phục nào.',
+    noGarmentsAdmin: 'Chưa có trang phục.',
     tryLink: 'Thử',
     deleteBtn: 'Xóa',
     jobsSection: 'Lịch Sử Thử Đồ',
-    noJobs: 'Chưa có lượt thử đồ nào.',
+    noJobs: 'Chưa có job nào.',
     viewResult: 'Xem kết quả →',
   },
 };
@@ -210,24 +176,20 @@ function applyLang(lang) {
   localStorage.setItem('lang', lang);
   const t = TRANSLATIONS[lang];
 
-  // Update all data-i18n elements
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
     if (t[key] !== undefined) el.innerHTML = t[key];
   });
 
-  // Update placeholders
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     const key = el.dataset.i18nPlaceholder;
     if (t[key] !== undefined) el.placeholder = t[key];
   });
 
-  // Toggle lang button states
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('lang-btn-active', btn.dataset.lang === lang);
   });
 
-  // Update html lang attribute
   document.documentElement.lang = lang;
 }
 
